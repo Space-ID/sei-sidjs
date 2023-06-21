@@ -1,16 +1,16 @@
-const SID = require('./dist/index').default
-const RPC =  require('./dist/constants/rpc')
-const SIDfunctions = require('./dist/index')                                                                                                                                                                                
-const Web3 = require('web3')                                                                                                                
+const SeiID = require('./dist/index').default
+const {getSeiIDAddress} = require('./dist/index')
+const {getCosmWasmClient} = require("@sei-js/core")
 
-let sid 
+
+let seiId
 
 async function main(name) {
-  const provider = new Web3.providers.HttpProvider(RPC.apis.bsc_mainnet)
-  sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress('56') })
+    const client = await getCosmWasmClient('https://rpc.atlantic-2.seinetwork.io/');
+    seiId = new SeiID({client, chainId: 'atlantic-2', seiIdAddress: getSeiIDAddress('atlantic-2')})
 
-  const address = await sid.name(name).getAddress() // 0x123                                                                                
-  console.log("name: %s, address: %s", name, address)                                                                                          
+    const address = await seiId.name(name).getAddress()
+    console.log("name: %s, address: %s", name, address)
+}
 
-}                                                                                                                                           
-main("resolver.bnb")
+main("000.sei")
