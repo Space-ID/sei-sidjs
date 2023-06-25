@@ -15,8 +15,9 @@ npm install @siddomains/sei-sidjs @sei-js/core
 All that's needed to get started is a CosmWasmClient instance, you should pass it and select chain id when creating a new SeiID instance.
 ```
 // atlantic-2 testnet domain example
-import SeiID, {getSeiIDAddress} from ('@siddomains/sei-sidjs')
-import {getCosmWasmClient} from ("@sei-js/core")
+const SeiID = require('@siddomains/sei-sidjs').default
+const {getSeiIDAddress} = require('@siddomains/sei-sidjs')
+const {getCosmWasmClient} = require("@sei-js/core")
 
 let seiId
 
