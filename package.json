@@ -1,9 +1,9 @@
 {
-  "name": "@siddomains/sidjs",
-  "version": "0.1.24",
-  "description": "sid.js v2",
+  "name": "@siddomains/sei-sidjs",
+  "version": "0.0.1",
+  "description": "sei-sidjs v1",
   "main": "dist/index.js",
-  "repository": "Space-ID/sidjs",
+  "repository": "Space-ID/sei-sidjs",
   "files": [
     "dist"
   ],
@@ -41,21 +41,16 @@
     "esm": "^3.2.22",
     "ganache-cli": "^6.4.3",
     "ganache-core": "^2.11.3",
-    "jest": "^26.4.2",
-    "web3": "^1.7.0"
+    "jest": "^26.4.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4",
     "@ensdomains/ens-validation": "^0.1.0",
     "@ensdomains/eth-ens-namehash": "^2.0.15",
-    "@siddomains/address-encoder": "^0.0.4",
-    "@siddomains/resolver": "0.1.1",
-    "@siddomains/sid": "0.1.2",
-    "content-hash": "^2.5.2",
-    "js-sha3": "^0.8.0",
-    "lodash": "^4.17.21"
+    "lodash.toarray": "^4.4.0",
+    "@sei-js/core": "^1.4.0"
   },
   "peerDependencies": {
-    "ethers": "^5.7.2"
+    "@sei-js/core": "^1.4.0"
   }
 }

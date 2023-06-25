@@ -1,92 +1,47 @@
-# Use sidjs SDK to interact with SID contracts 
+# Use sei-sidjs SDK to interact with SEI-SID contracts 
 
 
-# SID.js
-SIDjs integrates the SID contract and ENS and supports all the ENSjs APIs,  you will only need one unified SDK to integrate all domains across multiple chains. SIDjs will hide all the complicated cross-chain detail from the partners, making the integration very easy.
+# SEI-SID.js
+SEI-SIDjs integrates the SEI-SID contract.
 
 ## Overview of the API
 
 ### Installation
-Install @siddomains/sidjs, alongside [web3](https://www.npmjs.com/package/web3).
+Install @siddomains/sei-sidjs, alongside [@sei-js/core](https://www.npmjs.com/package/@sei-js/core).
 ```
-npm install @siddomains/sidjs web3
+npm install @siddomains/sei-sidjs @sei-js/core
 ```
 ### Getting Started
-All that's needed to get started is a web3 provider instance, you should pass it and select network id when creating a new SID instance.
+All that's needed to get started is a CosmWasmClient instance, you should pass it and select chain id when creating a new SeiID instance.
 ```
-// bsc test domain example
-const SID = require('@siddomains/sidjs').default      
-const SIDfunctions = require('@siddomains/sidjs')                                                                                                                                                                                
-const Web3 = require('web3')                                                                                                                
+// atlantic-2 testnet domain example
+import SeiID, {getSeiIDAddress} from ('@siddomains/sei-sidjs')
+import {getCosmWasmClient} from ("@sei-js/core")
 
-let sid 
+let seiId
 
 async function main(name) {
-  const infura = "https://data-seed-prebsc-1-s1.binance.org:8545/"  
-  const provider = new Web3.providers.HttpProvider(infura)
-  sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress('97') })
+    const client = await getCosmWasmClient('https://rpc.atlantic-2.seinetwork.io/');
+    seiId = new SeiID({client, chainId:'atlantic-2', seiIdAddress: getSeiIDAddress('atlantic-2')})
 
-  const address = await sid.name(name).getAddress() // 0x123                                                                                
-  console.log("name: %s, address: %s", name, address)                                                                                          
+    const address = await seiId.name(name).getAddress()
+    console.log("name: %s, address: %s", name, address)
+}
 
-}                                                                                                                                           
-main("resolver.bnb")
-```
-
-```
-// bsc mainnet domain example
-const SID = require('@siddomains/sidjs').default      
-const SIDfunctions = require('@siddomains/sidjs')
-const rpc = require('@siddomains/sidjs/dist/constants/rpc')                                                                                                                                                                                
-const Web3 = require('web3')                                                                                                                
-
-let sid 
-
-async function main(name) {
-  const provider = new Web3.providers.HttpProvider(rpc.apis.bsc_mainnet)
-  sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress('56') })
-
-  const address = await sid.name(name).getAddress() // 0x123                                                                                
-  console.log("name: %s, address: %s", name, address)                                                                                          
-
-}                                                                                                                                           
-main("resolver.bnb")
-
-```
-
-```
-// ens domain example
-const SID = require('@siddomains/sidjs').default      
-const SIDfunctions = require('@siddomains/sidjs')                                                                                                                                                                                
-const Web3 = require('web3')                                                                                                                
-
-let sid 
-
-async function main(name) {
-  const infura = "https://web3.ens.domains/v1/mainnet"
-  const provider = new Web3.providers.HttpProvider(infura)
-  sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress('1') })
-
-  const address = await sid.name(name).getAddress() // 0x123                                                                                
-  console.log("name: %s, address: %s", name, address)                                                                                          
-
-}                                                                                                                                           
-main("resolver.ens")
-
+main("000.sei")
 ```
 
 ### exports
 
 ```
-default - SID
-getSidAddress
-getResolverContract
-getSIDContract
-namehash
-labelhash
+default - SeiID
+getSeiIDAddress
+domainNode
+domainTokenId
+validateName
 ```
 
-### SID Interface
+### SeiID Interface
 
 ```
 name(name: String) => Name
@@ -95,114 +50,36 @@ name(name: String) => Name
 Returns a Name Object, that allows you to make record queries.
 
 ```
-resolver(address: EvmAddress) => Resolver
+resolver(address: SeiAddress) => Resolver
 ```
 
 Returns a Resolver Object, allowing you to query names from this specific resolver. Most useful when querying a different resolver that is different than is currently recorded on the registry. E.g. migrating to a new resolver
 
 ```
-async getName(address: EvmAddress) => Promise<Name>
+async getName(address: SeiAddress) => Promise<Name>
 ```
 
-Returns the reverse record for a particular Evm address.
-
-```
-async setReverseRecord(name: Name) => Promise<EthersTxObject>
-```
-
-Sets the reverse record for the current Evm address
+Returns the reverse record for a particular Sei address.
 
 ### Name Interface
 
 ```ts
-async getOwner() => Promise<EvmAddress>
+async getOwner() => Promise<SeiAddress>
 ```
 
-Returns the owner/controller for the current SID name.
+Returns the owner/controller for the current SeiID name.
 
 ```ts
-async setOwner(address: EvmAddress) => Promise<Ethers>
+async getResolver() => Promise<SeiAddress>
 ```
 
-Sets the owner/controller for the current SID name.
+Returns the resolver for the current SeiID name.
 
 ```ts
-async getResolver() => Promise<EvmAddress>
+async getAddress() => Promise<SeiAddress>
 ```
 
-Returns the resolver for the current SID name.
-
-```ts
-async setResolver(address: EvmAddress) => Promise<EvmAddress>
-```
-
-Sets the resolver for the current SID name.
-
-```ts
-async getTTL() => Promise<Number>
-```
-
-Returns the TTL for the current SID name.
-
-```ts
-async getAddress(coinId: String) => Promise<EvmAddress>
-```
-
-Returns the address for the current SID name for the coinId provided.
-
-```ts
-async setAddress(coinId: String, address: EvmAddress) => Promise<EthersTxObject>
-```
-
-Sets the address for the current SID name for the coinId provided.
-
-```ts
-async getContent() => Promise<ContentHash>
-```
-
-Returns the contentHash for the current SID name.
-
-```ts
-async setContenthash(content: ContentHash) => Promise<EthersTxObject>
-```
-
-Sets the contentHash for the current SID name.
-
-```ts
-async getText(key: String) => Promise<String>
-```
-
-Returns the text record for a given key for the current SID name.
-
-```ts
-async setText(key: String, recordValue: String) => Promise<EthersTxObject>
-```
-
-Sets the text record for a given key for the current SID name.
-
-```ts
-async setSubnodeOwner(label: String, newOwner: EvmAddress) => Promise<EthersTxObject>
-```
-
-Sets the subnode owner for a subdomain of the current SID name.
-
-```ts
-async setSubnodeRecord(label: String, newOwner: EvmAddress, resolver: EvmAddress, ttl: ?Number) => Promise<EthersTxObject>
-```
-
-Sets the subnode owner, resolver, ttl for a subdomain of the current SID name in one transaction.
-
-```ts
- async createSubdomain(label: String) => Promise<EthersTxObject>
-```
-
-Creates a subdomain for the current SID name. Automatically sets the owner to the signing account.
-
-```ts
-async deleteSubdomain(label: String) => Promise<EthersTxObject>
-```
-
-Deletes a subdomain for the current SID name. Automatically sets the owner to "0x0..."
+Returns the address for the current SeiID name.
 
 ## Resolver Interface
 
