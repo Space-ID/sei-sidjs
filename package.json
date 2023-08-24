@@ -1,6 +1,6 @@
 {
   "name": "@siddomains/sei-sidjs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "sei-sidjs v1",
   "main": "dist/index.js",
   "repository": "Space-ID/sei-sidjs",
@@ -24,6 +24,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@ensdomains/mock": "^2.0.37",
+    "@sei-js/core": "^3.0.1",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
     "babel-jest-assertions": "^0.1.0",
@@ -41,8 +42,7 @@
     "esm": "^3.2.22",
     "ganache-cli": "^6.4.3",
     "ganache-core": "^2.11.3",
-    "jest": "^26.4.2",
-    "@sei-js/core": "^3.0.1"
+    "jest": "^26.4.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4",
