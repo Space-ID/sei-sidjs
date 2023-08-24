@@ -4,15 +4,20 @@ import {namehash, validateName, domainNode, domainTokenId} from './utils'
 function getSeiIDAddress(networkId) {
     switch (networkId) {
         case 'atlantic-2':
-            return 'sei19nwj9c0jsdpsq7cwhl8t0cygvv6d024wy0t4hs72v7aajvqmsrjqhe7fkv'
+            return 'sei1q49lp2y87lt0p9pcpv3al2x3gxq3g2504sxh8knamnlarhwhckgqctpnf0'
+        case 'pacific-1':
+            return 'sei1qwzmp9tw2guxjwjteyjn52efu5ny0a5sc9e7lq69zytn87f30hksrlytqy'
         default:
             return ''
     }
 }
+
 function getSeiIDReverseResolverAddress(networkId) {
     switch (networkId) {
         case 'atlantic-2':
-            return 'sei1hjgekx06xkpr09zx53g4hngcu3q074ffqhkhh07eje79tyh233hsne0w0t'
+            return 'sei1a59k7mc9hsvtaeu532etl2geqmqdyufjncjkg0h3lxsu5u2rpensanaxwf'
+        case 'pacific-1':
+            return 'sei1qujw7gxacyk08fpg0lsf377f727ldq8f9cmjlrxt6awdkag9ypjsdnkh98'
         default:
             return ''
     }
