@@ -87,28 +87,19 @@ Returns the reverse record for a particular Sei address.
 ### Name Interface
 
 ```ts
-async
-getOwner()
-=>
-Promise<SeiAddress>
+async getOwner() => Promise<SeiAddress>
 ```
 
 Returns the owner/controller for the current SeiID name.
 
 ```ts
-async
-getResolver()
-=>
-Promise<SeiAddress>
+async getResolver() => Promise<SeiAddress>
 ```
 
 Returns the resolver for the current SeiID name.
 
 ```ts
-async
-getAddress()
-=>
-Promise<SeiAddress>
+async getAddress() => Promise<SeiAddress>
 ```
 
 Returns the address for the current SeiID name.
