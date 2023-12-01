@@ -1,6 +1,6 @@
 {
   "name": "@siddomains/sei-sidjs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "sei-sidjs v1",
   "main": "dist/index.js",
   "repository": "Space-ID/sei-sidjs",
