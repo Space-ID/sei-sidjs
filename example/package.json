@@ -2,6 +2,6 @@
   "name": "example",
   "version": "1.0.0",
   "dependencies": {
-    "@siddomains/sei-sidjs": "^0.0.3"
+    "@siddomains/sei-sidjs": "^0.0.4"
   }
 }
