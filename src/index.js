@@ -149,13 +149,18 @@ export default class SeiID {
                 const domain = res.name.endsWith('.sei') ? res.name : res.name + '.sei'
                 const addr = await this.name(domain).getAddress()
                 if (addr?.toLowerCase() !== address.toLowerCase()) {
-                    return
+                    return undefined
                 }
                 return domain
             }
         } catch (e) {
-            console.error(e)
+            if (e.message === 'Query failed with (18): alloc::string::String not found: query wasm contract failed: invalid request') {
+                return undefined
+            } else {
+                console.error(e)
+            }
         }
+
     }
 }
 
